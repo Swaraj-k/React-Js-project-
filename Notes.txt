@@ -1,0 +1,1 @@
+module.exports = mongoose.model('name', schema name) // while exporting model
