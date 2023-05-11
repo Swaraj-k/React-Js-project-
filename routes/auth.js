@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
-//Create a user using :Post "/api/auth/createuser". Doesn't require login
+const bcrypt = require("bcryptjs");
+const JWT_SECRET = "Harryisagood$boy";
+const jwt = require("jsonwebtoken");
+
+  //Create a user using :Post "/api/auth/createuser". Doesn't require login
 router.post(
   "/createuser",
   [
@@ -25,17 +29,25 @@ router.post(
           .status(400)
           .json({ error: "Sorry a user with same email exists." });
       }
-
-      //Create a New User
+      const salt = await bcrypt.genSalt(10);
+      const secPass = await bcrypt.hash(req.body.password, salt);
+    //Create a New User
       user = await User.create({
         name: req.body.name,
-        password: req.body.password,
+        password: secPass,
         email: req.body.email,
       });
-      res.json(user);
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      const authToken = jwt.sign(data, JWT_SECRET);
+    // res.json(user);
+      res.json({ authToken });
     } catch (error) {
       console.log(error.message);
-      res.status(500).send("Some Error Oquired")
+      res.status(500).send("Some Error Oquired");
     }
   }
 );
