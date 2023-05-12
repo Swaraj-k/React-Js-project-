@@ -12,10 +12,11 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
-
 });
 // Route 2-- Add User Note using :Post "/api/auth/addntoe". Login Required
-router.get("/addnotes",fetchuser,
+router.get(
+  "/addnotes",
+  fetchuser,
   [
     body("title", "Enter a valid title").isLength({ min: 3 }),
     body("description", "Description must be atleast 5 charactes.").isLength({
@@ -45,5 +46,36 @@ router.get("/addnotes",fetchuser,
     }
   }
 );
+// Route 3--Update an existing note:Post "/api/note/updatenote". Login Required
+router.put("/updatenote/:id", fetchuser, async (req, res) => {
+  const { title, description, tag } = req.body;
+  //Create a newNote Object
+  const newNote = {};
+  if (title) {
+    newNote.title = title;
+  }
+  if (description) {
+    newNote.description = description;
+  }
+  if (tag) {
+    newNote.tag = tag;
+  }
 
+  //Find the note to be updated
+  let note = await Note.findById(req.params.id);
+  if (!note) {
+    return res.status(404).send("Not Found");
+  }
+
+  if (note.user.toString() !== req.user.id) {
+    return res.status(401).send("Not Allowed");
+  }
+
+  note = await Note.findByIdAndUpdate(
+    req.params.id,
+    { $set: newNote },
+    { new: true }
+  );
+  res.json({ note });
+});
 module.exports = router;
