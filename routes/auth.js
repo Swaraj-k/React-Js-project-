@@ -92,7 +92,7 @@ router.post(
   }
 );
 
-// Route -- Get a user using :Post "/api/auth/createuser". Login Required
+// Route 3-- Get a user using :Post "/api/auth/createuser". Login Required
 router.post(
   "/getuser",fetchuser,
    async (req, res) => {
