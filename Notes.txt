@@ -1,0 +1,5 @@
+module.exports = mongoose.model('name', schema name) // while exporting model
+Authentication
+Password Hashing salt
+Authentication Token -- jwt . io --this is website for token meaning
+Put request for the ubdate
