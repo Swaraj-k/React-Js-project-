@@ -13,7 +13,7 @@ app.use('/api/auth', require('./routes/auth.js'))
 app.use('/api/notes', require('./routes/notes.js'))
 
 
-//Host port 
+//Host port
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
