@@ -1,9 +1,11 @@
-import React from "react";
+import Notes from "./Notes";
+
 export default function Home() {
+
   return (
     <div className="container my-3">
       <h1>Add a Note</h1>
-      <form  className="my-3.">
+      <form className="my-3.">
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -29,7 +31,11 @@ export default function Home() {
           />
         </div>
         <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="exampleCheck1"
+          />
           <label className="form-check-label" htmlFor="exampleCheck1">
             Check me out
           </label>
@@ -38,10 +44,7 @@ export default function Home() {
           Submit
         </button>
       </form>
-      <div className="container my-3">
-      <h1>Your Note</h1>
-
-      </div>
+      <Notes></Notes>
     </div>
   );
 }
