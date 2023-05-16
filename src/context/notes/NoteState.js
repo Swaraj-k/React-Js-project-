@@ -9,17 +9,9 @@ const NoteState = (props) => {
   //eslint-disable-next-line
   const [State, setState] = useState();
 
-  const update = () => {
-    setTimeout(() => {
-      setState({
-        name: "Larry",
-        class: "10b",
-      });
-    }, 1000);
-  };
 
   return (
-    <NoteContext.Provider value={{ state, update }}>
+    <NoteContext.Provider>
       {props.children}
     </NoteContext.Provider>
   );

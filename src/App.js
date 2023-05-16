@@ -8,16 +8,16 @@ function App() {
   return (
     <>
       <NoteState>
-          <div className="contianer text-center">
         <Router>
           <Navbar></Navbar>
+          <div className="container">
           <Routes>
             <Route exact path="/" element=<Home></Home>></Route>
             <Route exact path="/about" element=<About></About>></Route>
           </Routes>
-        </Router>
-        <h1>This is react app</h1>
           </div>
+        </Router>
+   
       </NoteState>
     </>
   );
