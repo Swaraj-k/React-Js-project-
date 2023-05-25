@@ -14,7 +14,7 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
   }
 });
 // Route 2-- Add User Note using :Post "/api/auth/addntoe". Login Required
-router.get(
+router.post(
   "/addnotes",
   fetchuser,
   [
